@@ -15,7 +15,7 @@ public class Drawer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
 
-    private String LockerId;
+    private Integer lockerId;
 
     private String dimension;
 

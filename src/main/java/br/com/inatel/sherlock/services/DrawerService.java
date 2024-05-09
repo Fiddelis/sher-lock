@@ -5,6 +5,7 @@ import br.com.inatel.sherlock.repository.DrawerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,6 +16,10 @@ public class DrawerService {
 
     public Optional<Drawer> getById(int id) {
         return drawerRepository.findById(id);
+    }
+
+    public List<Drawer> getByLockerId(int lockerId) {
+        return drawerRepository.findDrawerByLockerId(lockerId);
     }
 
     public Drawer save(Drawer drawer) {
