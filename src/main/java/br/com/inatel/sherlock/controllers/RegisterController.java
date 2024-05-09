@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class RegisterController {
@@ -24,7 +25,7 @@ public class RegisterController {
     private DrawerService drawerService;
 
     @PostMapping("/register")
-    public String registerClientAndProductInDrawer(@RequestBody ClientProductDTO clientProductDTO) {
+    public @ResponseBody String registerClientAndProductInDrawer(@RequestBody ClientProductDTO clientProductDTO) {
 
         Client client = clientProductDTO.getClient();
         Product product = clientProductDTO.getProduct();
@@ -36,7 +37,6 @@ public class RegisterController {
             productService.save(product);
             return "201";
         }
-
         return null;
     }
 
