@@ -13,7 +13,7 @@ public class LockerService {
     @Autowired
     private LockerRepository lockerRepository;
 
-    public Optional<Locker> getById(int id) {
+    public Optional<Locker> getById(Long id) {
         return lockerRepository.findById(id);
     }
 
