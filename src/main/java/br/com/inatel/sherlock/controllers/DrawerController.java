@@ -3,45 +3,51 @@ package br.com.inatel.sherlock.controllers;
 import br.com.inatel.sherlock.models.Drawer;
 import br.com.inatel.sherlock.services.DrawerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/drawer")
 public class DrawerController {
 
     @Autowired
     DrawerService drawerService;
 
-    @GetMapping("/drawer/listInLocker/{lockerId}")
-    public List<Drawer> checkDrawersInLocker(@PathVariable int lockerId) {
-        return drawerService.getByLockerId(lockerId);
-    }
+    @GetMapping("/list-in-locker/{lockerId}")
+    public ResponseEntity<List<Drawer>> checkDrawersInLocker(@PathVariable Long lockerId) {
+        List<Drawer> drawers = drawerService.getByLockerId(lockerId);
 
-    @GetMapping("/drawer/availability/{id}")
-    public Boolean checkDrawerAvailability(@PathVariable int id) {
-        Optional<Drawer> drawerOptional = drawerService.getById(id);
-
-        if(drawerOptional.isPresent()) {
-            Drawer drawer = drawerOptional.get();
-            return drawer.getAvailable();
+        if (drawers.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
-        return null;
+
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/drawer/reserve/{id}")
-    public Drawer reserveDrawer(int id) {
+    @GetMapping("/check/{id}")
+    public ResponseEntity<Drawer> getDrawer(@PathVariable Long id) {
         Optional<Drawer> drawerOptional = drawerService.getById(id);
 
-        if(drawerOptional.isPresent()) {
+        return drawerOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/reserve/{id}")
+    public ResponseEntity<Drawer> reserveDrawer(@PathVariable Long id) {
+        Optional<Drawer> drawerOptional = drawerService.getById(id);
+
+        if (drawerOptional.isPresent()) {
             Drawer drawer = drawerOptional.get();
             drawer.setAvailable(false);
+            drawerService.save(drawer);
 
-            return drawer;
+            return ResponseEntity.ok().build();
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
 }

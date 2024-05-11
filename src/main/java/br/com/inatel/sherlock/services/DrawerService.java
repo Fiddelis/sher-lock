@@ -14,11 +14,11 @@ public class DrawerService {
     @Autowired
     private DrawerRepository drawerRepository;
 
-    public Optional<Drawer> getById(int id) {
+    public Optional<Drawer> getById(Long id) {
         return drawerRepository.findById(id);
     }
 
-    public List<Drawer> getByLockerId(int lockerId) {
+    public List<Drawer> getByLockerId(Long lockerId) {
         return drawerRepository.findDrawerByLockerId(lockerId);
     }
 
@@ -26,10 +26,10 @@ public class DrawerService {
         return drawerRepository.save(drawer);
     }
 
-    public Drawer removeObject(int id) {
+    public Drawer removeObject(Long id) {
         Optional<Drawer> drawerOptional = drawerRepository.findById(id);
 
-        if(drawerOptional.isPresent()) {
+        if (drawerOptional.isPresent()) {
             Drawer drawer = drawerOptional.get();
             drawer.setAvailable(true);
 
@@ -39,10 +39,10 @@ public class DrawerService {
         return null;
     }
 
-    public Drawer deliverObject(int id) {
+    public Drawer deliverObject(Long id) {
         Optional<Drawer> drawerOptional = drawerRepository.findById(id);
 
-        if(drawerOptional.isPresent()) {
+        if (drawerOptional.isPresent()) {
             Drawer drawer = drawerOptional.get();
             drawer.setAvailable(false);
 

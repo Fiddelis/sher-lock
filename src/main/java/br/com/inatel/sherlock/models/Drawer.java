@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Drawer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Long Id;
 
     private Integer lockerId;
 

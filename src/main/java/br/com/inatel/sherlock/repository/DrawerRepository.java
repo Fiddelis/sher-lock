@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface DrawerRepository extends JpaRepository<Drawer, Integer> {
-    List<Drawer> findDrawerByLockerId(Integer lockerId);
+public interface DrawerRepository extends JpaRepository<Drawer, Long> {
+    List<Drawer> findDrawerByLockerId(Long lockerId);
 
 }
