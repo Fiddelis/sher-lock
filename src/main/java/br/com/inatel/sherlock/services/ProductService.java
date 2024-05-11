@@ -14,7 +14,9 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Optional<Product> getById(int id) { return productRepository.findById(id); }
+    public Optional<Product> getById(Long id) {
+        return productRepository.findById(id);
+    }
 
     public Product save(Product product) {
         product.setPassCode(UUID.randomUUID().toString());

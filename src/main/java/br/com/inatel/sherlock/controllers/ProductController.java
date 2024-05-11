@@ -7,13 +7,16 @@ import br.com.inatel.sherlock.services.ClientService;
 import br.com.inatel.sherlock.services.DrawerService;
 import br.com.inatel.sherlock.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class RegisterController {
+@RequestMapping("/product")
+public class ProductController {
 
     @Autowired
     private ClientService clientService;
@@ -21,11 +24,8 @@ public class RegisterController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private DrawerService drawerService;
-
     @PostMapping("/register")
-    public @ResponseBody String registerClientAndProductInDrawer(@RequestBody ClientProductDTO clientProductDTO) {
+    public @ResponseBody ResponseEntity<Product> registerClientAndProductInDrawer(@RequestBody ClientProductDTO clientProductDTO) {
 
         Client client = clientProductDTO.getClient();
         Product product = clientProductDTO.getProduct();
@@ -35,9 +35,10 @@ public class RegisterController {
         if(clientService.getById(client.getId()).isPresent()) {
             product.setClientId(client.getId());
             productService.save(product);
-            return "201";
+            return ResponseEntity.ok(product);
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
+
 
 }

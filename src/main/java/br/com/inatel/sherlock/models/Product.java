@@ -1,10 +1,7 @@
 package br.com.inatel.sherlock.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,12 +13,12 @@ import java.time.LocalDateTime;
 @Setter
 public class Product {
     @Id
-    private Integer id;
+    private Long id;
 
-    private Integer clientId;
+    private Long clientId;
 
     @JsonProperty("drawer_id")
-    private Integer drawerId;
+    private Long drawerId;
 
     private String name;
 
