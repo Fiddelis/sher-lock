@@ -20,4 +20,6 @@ public class Locker {
     private Double latitude;
 
     private Double longitude;
+
+    private String ip;
 }

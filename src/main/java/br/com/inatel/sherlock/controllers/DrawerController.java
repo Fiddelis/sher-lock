@@ -39,7 +39,7 @@ public class DrawerController {
         return drawerOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/reserve/{id}")
+    @PostMapping("/reserve/{id}")
     public ResponseEntity<Drawer> reserveDrawer(@PathVariable Long id) {
         Optional<Drawer> drawerOptional = drawerService.getById(id);
 
