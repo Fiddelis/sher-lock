@@ -1,5 +1,6 @@
 package br.com.inatel.sherlock.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,5 +22,6 @@ public class Client {
 
     private String name;
 
-    private String phone_number;
+    @JsonProperty("phone_number")
+    private String phoneNumber;
 }

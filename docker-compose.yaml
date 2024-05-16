@@ -1,7 +1,11 @@
 services:
+  spring-app:
+    build: .
+    ports:
+      - "8080:8080"
+
   mysql-db:
     image: mysql:8.4
-    container_name: sherlock-mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: admin

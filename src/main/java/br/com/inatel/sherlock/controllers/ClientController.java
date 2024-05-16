@@ -4,12 +4,16 @@ import br.com.inatel.sherlock.models.Client;
 import br.com.inatel.sherlock.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/client")
 public class ClientController {
 
@@ -17,14 +21,14 @@ public class ClientController {
     ClientService clientService;
 
     @GetMapping("/check/{id}")
-    public @ResponseBody ResponseEntity<Client> getClient(@PathVariable Long id) {
+    public ResponseEntity<Client> getClient(@PathVariable Long id) {
         Optional<Client> clientOptional = clientService.getById(id);
 
         return clientOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/create")
-    public @ResponseBody ResponseEntity<Client> setClient(@RequestBody Client client) {
+    public ResponseEntity<Client> setClient(@RequestBody Client client) {
         clientService.save(client);
 
         if (clientService.exists(client.getId()))
@@ -34,7 +38,7 @@ public class ClientController {
     }
 
     @PostMapping("/update")
-    public @ResponseBody ResponseEntity<Client> updateClient(@RequestBody Client client) {
+    public ResponseEntity<Client> updateClient(@RequestBody Client client) {
         if (clientService.exists(client.getId())) {
             clientService.update(client);
 

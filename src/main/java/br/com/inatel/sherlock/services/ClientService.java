@@ -31,7 +31,7 @@ public class ClientService {
 
             if (clientUpdate.getAddress() != null) client.setAddress(clientUpdate.getAddress());
             if (clientUpdate.getMail() != null) client.setMail(clientUpdate.getMail());
-            if (clientUpdate.getPhone_number() != null) client.setPhone_number(clientUpdate.getPhone_number());
+            if (clientUpdate.getPhoneNumber() != null) client.setPhoneNumber(clientUpdate.getPhoneNumber());
             if (clientUpdate.getName() != null) client.setName(clientUpdate.getName());
 
             return clientRepository.save(client);

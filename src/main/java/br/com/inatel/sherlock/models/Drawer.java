@@ -1,9 +1,7 @@
 package br.com.inatel.sherlock.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,9 +11,10 @@ import lombok.Setter;
 public class Drawer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long id;
 
-    private Integer lockerId;
+    @JsonProperty("locker_id")
+    private Long lockerId;
 
     private String dimension;
 

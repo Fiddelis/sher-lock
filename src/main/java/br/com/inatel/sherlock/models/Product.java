@@ -15,6 +15,7 @@ public class Product {
     @Id
     private Long id;
 
+    @JsonProperty("client_id")
     private Long clientId;
 
     @JsonProperty("drawer_id")
@@ -39,6 +40,7 @@ public class Product {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime departureDate;
 
+    @JsonProperty("pass_code")
     private String passCode;
 
     private Boolean available;

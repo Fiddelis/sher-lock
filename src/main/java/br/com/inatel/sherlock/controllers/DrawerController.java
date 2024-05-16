@@ -4,15 +4,17 @@ import br.com.inatel.sherlock.models.Drawer;
 import br.com.inatel.sherlock.services.DrawerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/drawer")
 public class DrawerController {
 
@@ -50,4 +52,15 @@ public class DrawerController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/create")
+    public ResponseEntity<Drawer> createDrawer(@RequestBody Drawer drawerSave) {
+        Drawer drawer = drawerService.save(drawerSave);
+
+        if (drawer != null)
+            return ResponseEntity.ok().build();
+
+        return ResponseEntity.notFound().build();
+    }
+
 }

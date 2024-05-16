@@ -1,10 +1,9 @@
 package br.com.inatel.sherlock.controllers;
 
-import br.com.inatel.sherlock.models.Client;
 import br.com.inatel.sherlock.DTO.ClientProductDTO;
+import br.com.inatel.sherlock.models.Client;
 import br.com.inatel.sherlock.models.Product;
 import br.com.inatel.sherlock.services.ClientService;
-import br.com.inatel.sherlock.services.DrawerService;
 import br.com.inatel.sherlock.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +31,7 @@ public class ProductController {
 
         clientService.save(client);
 
-        if(clientService.getById(client.getId()).isPresent()) {
+        if (clientService.getById(client.getId()).isPresent()) {
             product.setClientId(client.getId());
             productService.save(product);
             return ResponseEntity.ok(product);

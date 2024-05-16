@@ -26,6 +26,10 @@ public class DrawerService {
         return drawerRepository.save(drawer);
     }
 
+    public Boolean exists(Long id) {
+        return drawerRepository.existsById(id);
+    }
+
     public Drawer removeObject(Long id) {
         Optional<Drawer> drawerOptional = drawerRepository.findById(id);
 
