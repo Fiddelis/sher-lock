@@ -5,9 +5,9 @@ import (
 	"github.com/fiddelis/sherlock/internal/model"
 )
 
-func GetDrawerById(id int) (model.Drawer, error) {
+func GetDrawerById(ID int) (model.Drawer, error) {
 	var drawer model.Drawer
-	result := database.DB.First(&drawer, id)
+	result := database.DB.First(&drawer, ID)
 	if result.Error != nil {
 		return model.Drawer{}, result.Error
 	}
@@ -29,4 +29,12 @@ func CreateDrawer(drawer model.Drawer) (model.Drawer, error) {
 		return model.Drawer{}, nil
 	}
 	return drawer, nil
+}
+
+func UpdateDrawer(drawer model.Drawer) error {
+	result := database.DB.Save(&drawer)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
 }

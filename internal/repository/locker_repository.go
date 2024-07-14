@@ -14,9 +14,9 @@ func GetAllLockers() ([]model.Locker, error) {
 	return lockers, nil
 }
 
-func GetLockerById(id int) (model.Locker, error) {
+func GetLockerById(ID int) (model.Locker, error) {
 	var locker model.Locker
-	result := database.DB.First(&locker, id)
+	result := database.DB.First(&locker, ID)
 	if result.Error != nil {
 		return model.Locker{}, result.Error
 	}
@@ -29,4 +29,12 @@ func CreateLocker(locker model.Locker) (model.Locker, error) {
 		return model.Locker{}, result.Error
 	}
 	return locker, nil
+}
+
+func UpdateLocker(locker model.Locker) error {
+	result := database.DB.Save(&locker)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
 }

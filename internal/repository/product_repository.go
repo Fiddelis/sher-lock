@@ -15,9 +15,9 @@ func GetAllProducts() ([]model.Product, error) {
 	return products, nil
 }
 
-func GetProductById(id int) (model.Product, error) {
+func GetProductByID(ID int) (model.Product, error) {
 	var product model.Product
-	result := database.DB.First(&product, id)
+	result := database.DB.First(&product, ID)
 	if result.Error != nil {
 		return model.Product{}, nil
 	}
@@ -31,4 +31,12 @@ func CreateProduct(product model.Product) (string, error) {
 		return "", result.Error
 	}
 	return product.PassCode, nil
+}
+
+func UpdateProduct(product model.Product) error {
+	result := database.DB.Save(&product)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
 }
