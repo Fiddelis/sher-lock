@@ -6,14 +6,10 @@ import (
 	"github.com/fiddelis/sherlock/internal/handler"
 
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func HandleRequest() {
 	r := gin.Default()
-
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.GET("/api/locker/all", handler.GetAllLockers)
 	r.GET("/api/locker/:id", handler.GetLockerById)
