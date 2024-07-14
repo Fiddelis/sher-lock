@@ -1,4 +1,0 @@
-- [x] Criar DTO para produtos/drawers
-- [x] Criar UUID do pass-code gerado automaticamente ao criar o Produto
-- [ ] Criar Templates do site (Bootstrap talvez?)
-- [ ] Testes
