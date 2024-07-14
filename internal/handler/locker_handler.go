@@ -9,13 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetAllLockers obtém todos os armários da base de dados.
-// @Summary Obter todos os armários
-// @Description Obter todos os armários da base de dados
-// @Tags lockers
-// @Produce json
-// @Success 200 {array} model.Locker
-// @Router /api/locker/all [get]
 func GetAllLockers(c *gin.Context) {
 	result, err := service.GetAllLockers()
 	if err != nil {
@@ -25,14 +18,6 @@ func GetAllLockers(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
-// GetLockerById obtém um armário pelo seu ID.
-// @Summary Obter armário por ID
-// @Description Obter um armário da base de dados pelo seu ID
-// @Tags lockers
-// @Produce json
-// @Param id path int true "ID do Armário"
-// @Success 200 {object} model.Locker
-// @Router /api/locker/{id} [get]
 func GetLockerById(c *gin.Context) {
 	id := c.Param("id")
 	lockerID, err := strconv.Atoi(id)
@@ -49,15 +34,6 @@ func GetLockerById(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
-// CreateLocker cria um novo armário.
-// @Summary Criar armário
-// @Description Criar um novo armário na base de dados
-// @Tags lockers
-// @Accept json
-// @Produce json
-// @Param locker body model.Locker true "Dados do Armário"
-// @Success 200 {object} model.Locker
-// @Router /api/locker [post]
 func CreateLocker(c *gin.Context) {
 	var locker model.Locker
 	if err := c.BindJSON(&locker); err != nil {

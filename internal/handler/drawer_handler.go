@@ -9,14 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetDrawerById obtém uma gaveta pelo seu ID.
-// @Summary Obter gaveta por ID
-// @Description Obter uma gaveta da base de dados pelo seu ID
-// @Tags drawers
-// @Produce json
-// @Param id path int true "ID da Gaveta"
-// @Success 200 {object} model.Drawer
-// @Router /api/drawer/{id} [get]
 func GetDrawerById(c *gin.Context) {
 	id := c.Param("id")
 	drawerID, err := strconv.Atoi(id)
@@ -33,14 +25,6 @@ func GetDrawerById(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
-// GetDrawersByLockerId obtém todas as gavetas de um armário pelo seu ID.
-// @Summary Obter gavetas por ID do Armário
-// @Description Obter todas as gavetas de um armário da base de dados pelo ID do armário
-// @Tags drawers
-// @Produce json
-// @Param locker_id path int true "ID do Armário"
-// @Success 200 {array} model.Drawer
-// @Router /api/drawer/in_locker/{locker_id} [get]
 func GetDrawersByLockerId(c *gin.Context) {
 	lockerID := c.Param("locker_id")
 	id, err := strconv.Atoi(lockerID)
@@ -57,15 +41,6 @@ func GetDrawersByLockerId(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
-// CreateDrawer cria uma nova gaveta.
-// @Summary Criar gaveta
-// @Description Criar uma nova gaveta na base de dados
-// @Tags drawers
-// @Accept json
-// @Produce json
-// @Param drawer body model.Drawer true "Dados da Gaveta"
-// @Success 200 {object} model.Drawer
-// @Router /api/drawer [post]
 func CreateDrawer(c *gin.Context) {
 	var drawer model.Drawer
 	if err := c.BindJSON(&drawer); err != nil {
