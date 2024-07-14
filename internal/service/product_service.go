@@ -10,7 +10,7 @@ func GetAllProducts() ([]model.Product, error) {
 }
 
 func GetProductById(id int) (model.Product, error) {
-	return repository.GetProductById(id)
+	return repository.GetProductByID(id)
 }
 
 func CreateProduct(product model.Product) (string, error) {
