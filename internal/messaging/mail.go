@@ -12,10 +12,10 @@ import (
 
 func SendMailToClient(mail string, product model.Product, qrCode []byte) error {
 	// Configurações do servidor SMTP da Hostinger
-	smtpHost := "smtp.hostinger.com"
-	smtpPort := 587
-	smtpUser := "contato@sherlog.shop"
-	smtpPass := "Lord131211@"
+	smtpHost := ""
+	smtpPort := 1
+	smtpUser := ""
+	smtpPass := ""
 
 	reader := bytes.NewReader(qrCode)
 
