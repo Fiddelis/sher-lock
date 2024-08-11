@@ -70,6 +70,15 @@ func CreateProductAndClient(c *gin.Context) {
 	for _, product := range r.Products {
 		product.ClientID = clientID
 
+		// Pegar endereço do locker para retirada
+		locker, err := repository.GetLockerByID(product.LockerID)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Erro ao encontrar locker"})
+			return
+		}
+		product.Address = locker.Address
+
+		// Verificar disponibilidade da gaveta
 		drawer, err := repository.GetDrawerByID(product.DrawerID)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Erro ao criar produto"})
@@ -88,7 +97,10 @@ func CreateProductAndClient(c *gin.Context) {
 		}
 
 		drawer.Available = false
-		repository.UpdateDrawer(drawer)
+		err = repository.UpdateDrawer(drawer)
+		if err != nil {
+			return
+		}
 
 		passCodes = append(passCodes, passCode)
 
