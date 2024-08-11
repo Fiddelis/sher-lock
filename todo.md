@@ -3,6 +3,8 @@
 - [x] endpoint pra atualizar a disponibilidade da gaveta (produto retirado)
   - [] endpoint para remover o id da gaveta do produto
 - [x] remover available do product
+- [ ] passCode
+- [ ] endpoint para atualizar disponibilidade da gaveta
 
 ### cadastro de produtos com cliente:
 GET /api/product/register
