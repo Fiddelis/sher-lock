@@ -1,42 +1,8 @@
 # Sher-Lock
+É um serviço de armários de encomendas distribuídos estrategicamente pela cidade, proporcionando uma solução eficiente e conveniente para o recebimento de pacotes. O funcionamento do sistema é simples e seguro:
 
-## API
+1. **Empresas de logística:** As empresas de logística podem depositar as encomendas nos armários Sher-Lock, distribuídos em pontos acessíveis e de fácil localização na cidade. Cada armário possui compartimentos de tamanhos variados, adequados para diferentes tipos de pacotes.
 
-### Locker
+2. **Clientes:** Os clientes recebem um QR Code por e-mail assim que a compra é feita. Com esse código, é possível retirar a encomenda de forma rápida e segura, sem a necessidade de interação com atendentes ou de cumprimento de horários específicos.
 
-/locker
-
-| Requisição | Descrição | Tipo |
-| -------------- | --------------- | ---- |
-| /list | Retorna uma lista de lockers salvas | GET |
-
-### Drawer
-
-/drawer
-
-| Requisição | Descrição | Tipo |
-| --------------- | --------------- | --------------- |
-| /list-in-locker/{locker_id} | Retorna uma lista de gavetas no locker | GET |
-| /check/{id} | Retorna as informações da gaveta especificada | GET |
-| /reserve/{id} | Reserva a gaveta especificada | POST |
-| /create | Cria uma gaveta a partir da informação do Json | POST |
-
-### Product
-
-/product
-
-| Requisição | Descrição | Tipo |
-| --------------- | --------------- | --------------- |
-| /register | Registra o produto com um respectivo cliente | POST |
-
-### Client
-
-/client
-
-| Requisição | Descrição | Tipo |
-| --------- | --------- | ---- |
-| /check/{id} | Retorna o cliente nesse id especificado | GET |
-| /create | Cria um cliente com o json enviado | POST |
-| /update | Atualiza o cliente | POST | 
-
-
+O **Sher-Lock** oferece, assim, uma solução prática tanto para empresas de logística quanto para consumidores, otimizando o processo de entrega e retirada de encomendas, reduzindo filas e aumentando a conveniência para todos os envolvidos.
