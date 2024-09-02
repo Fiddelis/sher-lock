@@ -16,6 +16,7 @@ import java.util.Map;
 public class ClientController {
 
     ClientService clientService;
+    Map<String, String> errorResponse = new HashMap<>();
     Client client;
 
     @Autowired
@@ -28,17 +29,49 @@ public class ClientController {
         client = clientService.getClientByID(id);
 
         if (client == null) {
-            Map<String, String> errorResponse = new HashMap<>();
-
-            errorResponse.put("error", "Client not found");
+            errorResponse.put("error", "client not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
 
-        return new ResponseEntity<>(client, HttpStatus.OK);
+        return ResponseEntity.ok(client);
     }
 
     @PostMapping
-    public  ResponseEntity<Object> createClient(@RequestBody Client client) {
-        client = clientService.setClient()
+    public ResponseEntity<Object> createClient(@RequestBody Client client) {
+
+        if(client == null) {
+            errorResponse.put("error", "missing information");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }
+
+        this.client = clientService.setClient(client);
+
+        return ResponseEntity.ok(this.client);
+        }
+
+    @PutMapping
+    public ResponseEntity<Object> updateClient(@RequestBody Client client) {
+        this.client = clientService.updateClient(client);
+
+        if(this.client == null) {
+            errorResponse.put("error", "client not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+
+        return ResponseEntity.ok(this.client);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteClient(@PathVariable Integer id) {
+        HashMap<String, String> successResponse = new HashMap<>();
+        successResponse.put("message", "client successfully deleted");
+
+        if(!clientService.deleteClient(id)) {
+            errorResponse.put("error", "client was not deleted");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+
+        return ResponseEntity.ok(successResponse);
+    }
+
 }
