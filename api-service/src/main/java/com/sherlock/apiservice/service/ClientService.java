@@ -20,6 +20,10 @@ public class ClientService {
     }
 
     public Client setClient(Client client) {
+        if(client == null) {
+            return null;
+        }
+
         return clientRepository.save(client);
     }
 
