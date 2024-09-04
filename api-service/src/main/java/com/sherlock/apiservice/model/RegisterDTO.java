@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MailDTO {
+public class RegisterDTO {
     public Client client;
     public Product product;
 }
