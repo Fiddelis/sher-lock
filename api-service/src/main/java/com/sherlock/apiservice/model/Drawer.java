@@ -1,6 +1,5 @@
 package com.sherlock.apiservice.model;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +24,4 @@ public class Drawer {
     private Integer lockerId;
 
     private String dimension;
-
-    private Boolean available;
 }
