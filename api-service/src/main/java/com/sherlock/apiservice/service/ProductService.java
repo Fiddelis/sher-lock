@@ -5,6 +5,7 @@ import com.sherlock.apiservice.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,6 +19,14 @@ public class ProductService {
 
     public Product getProductByID(Integer id) {
         return productRepository.findById(id).orElse(null);
+    }
+
+    public List<Product> getAll() {
+        return productRepository.findAll();
+    }
+
+    public List<Product> getAllByLockerIdAndWithdrawnDateIsNull(Integer lockerID) {
+        return productRepository.findAllByLockerIdAndWithdrawnDateIsNull(lockerID);
     }
 
     public Product setProduct(Product product) {
@@ -41,12 +50,18 @@ public class ProductService {
                 product.setName(updatedProduct.getName());
             if(updatedProduct.getDimension() != null)
                 product.setDimension(updatedProduct.getDimension());
-            if(updatedProduct.getAddress() != null)
-                product.setAddress(updatedProduct.getAddress());
             if(updatedProduct.getPassCode() != null)
                 product.setPassCode(updatedProduct.getPassCode());
             if(updatedProduct.getEstimatedDate() != null)
                 product.setEstimatedDate(updatedProduct.getEstimatedDate());
+            if(updatedProduct.getInsertedDate() != null)
+                product.setInsertedDate(updatedProduct.getInsertedDate());
+            if(updatedProduct.getWithdrawnDate() != null)
+                product.setWithdrawnDate(updatedProduct.getWithdrawnDate());
+            if(updatedProduct.getOpeningDate() != null)
+                product.setOpeningDate(updatedProduct.getOpeningDate());
+            if(updatedProduct.getClosingDate() != null)
+                product.setClosingDate(updatedProduct.getClosingDate());
 
             return productRepository.save(product);
         }

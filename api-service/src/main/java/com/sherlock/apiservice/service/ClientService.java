@@ -5,6 +5,8 @@ import com.sherlock.apiservice.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClientService {
 
@@ -15,11 +17,15 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
+    public List<Client> getAll() {
+        return clientRepository.findAll();
+    }
+
     public Client getClientByID(Integer id) {
         return clientRepository.findById(id).orElse(null);
     }
 
-    public Client setClient(Client client) {
+    public Client createClient(Client client) {
         if(client == null) {
             return null;
         }

@@ -5,6 +5,8 @@ import com.sherlock.apiservice.repository.DrawerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DrawerService {
     DrawerRepository drawerRepository;
@@ -16,6 +18,14 @@ public class DrawerService {
 
     public Drawer getDrawerByID(Integer id) {
         return drawerRepository.findById(id).orElse(null);
+    }
+
+    public List<Drawer> getAll() {
+        return drawerRepository.findAll();
+    }
+
+    public List<Drawer> getDrawersByLockerID(Integer lockerID) {
+        return drawerRepository.findAllByLockerId(lockerID);
     }
 
     public Drawer setDrawer(Drawer drawer) {
@@ -30,8 +40,6 @@ public class DrawerService {
                 drawer.setLockerId(updatedDrawer.getLockerId());
             if(updatedDrawer.getDimension() != null)
                 drawer.setDimension(updatedDrawer.getDimension());
-            if(updatedDrawer.getAvailable() != null)
-                drawer.setAvailable(updatedDrawer.getAvailable());
 
             return drawerRepository.save(drawer);
         }

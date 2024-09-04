@@ -5,6 +5,8 @@ import com.sherlock.apiservice.repository.LockerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LockerService {
     LockerRepository lockerRepository;
@@ -12,6 +14,10 @@ public class LockerService {
     @Autowired
     public LockerService(LockerRepository lockerRepository) {
         this.lockerRepository = lockerRepository;
+    }
+
+    public List<Locker> getAll() {
+        return lockerRepository.findAll();
     }
 
     public Locker getLockerByID(Integer id) {

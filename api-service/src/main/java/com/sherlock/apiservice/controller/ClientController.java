@@ -8,13 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-
 @RestController
-@RequestMapping("/client")
+@RequestMapping("/api/client")
 public class ClientController {
-
     ClientService clientService;
     Map<String, String> errorResponse = new HashMap<>();
     Client client;
@@ -22,6 +21,18 @@ public class ClientController {
     @Autowired
     public ClientController(ClientService clientService) {
         this.clientService = clientService;
+    }
+
+    @GetMapping
+    public ResponseEntity<Object> getAllClients() {
+        List<Client> clients = clientService.getAll();
+
+        if(clients.isEmpty()) {
+            errorResponse.put("error", "clients not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+
+        return ResponseEntity.ok(clients);
     }
 
     @GetMapping("/{id}")
@@ -44,7 +55,7 @@ public class ClientController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
 
-        this.client = clientService.setClient(client);
+        this.client = clientService.createClient(client);
 
         return ResponseEntity.ok(this.client);
         }
@@ -73,5 +84,4 @@ public class ClientController {
 
         return ResponseEntity.ok(successResponse);
     }
-
 }
