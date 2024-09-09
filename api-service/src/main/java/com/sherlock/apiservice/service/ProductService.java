@@ -30,7 +30,8 @@ public class ProductService {
     }
 
     public Product setProduct(Product product) {
-        product.setPassCode(UUID.randomUUID().toString());
+        product.setDeliveryCode(UUID.randomUUID().toString());
+        product.setWithdrawnCode(UUID.randomUUID().toString());
         return productRepository.save(product);
     }
 
@@ -50,8 +51,12 @@ public class ProductService {
                 product.setName(updatedProduct.getName());
             if(updatedProduct.getDimension() != null)
                 product.setDimension(updatedProduct.getDimension());
-            if(updatedProduct.getPassCode() != null)
-                product.setPassCode(updatedProduct.getPassCode());
+            if(updatedProduct.getAddress() != null)
+                product.setAddress(updatedProduct.getAddress());
+            if(updatedProduct.getDeliveryCode() != null)
+                product.setDeliveryCode(updatedProduct.getDeliveryCode());
+            if(updatedProduct.getWithdrawnCode() != null)
+                product.setWithdrawnCode(updatedProduct.getWithdrawnCode());
             if(updatedProduct.getEstimatedDate() != null)
                 product.setEstimatedDate(updatedProduct.getEstimatedDate());
             if(updatedProduct.getInsertedDate() != null)

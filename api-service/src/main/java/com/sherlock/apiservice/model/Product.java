@@ -37,14 +37,19 @@ public class Product {
 
     private String dimension;
 
-    @JsonProperty("pass_code")
-    private String passCode;
+    private String address;
+
+    @JsonProperty("withdrawn_code")
+    private String withdrawnCode;
+
+    @JsonProperty("delivery_code")
+    private String deliveryCode;
 
     @JsonProperty("estimated_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private Date estimatedDate;
 
-    @JsonProperty("inserted_date")
+        @JsonProperty("inserted_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private Date insertedDate;
 
