@@ -16,7 +16,7 @@ public class MailProducer {
 
     public void send(RegisterDTO mailDTO) throws JsonProcessingException {
         amqpTemplate.convertAndSend(
-                "mail-request-exchanges",
+                "mail-request-exchange",
                 "mail-request-rout-key",
                 objectMapper.writeValueAsString(mailDTO)
         );
