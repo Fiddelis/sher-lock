@@ -28,10 +28,10 @@
             <div class="email-container">
                 <h1>QRCode Gerado para retirada</h1>
                 <h3>Informações do Produto</h3>
-                <p><b>Nome:</b>${product.name}</p>
-                <p><b>Quantidade:</b>${product.quantity}</p>
-                <p><b>Data estimada:</b>${product.estimatedDate?date?string("dd/MM/yyyy")}</p>
-                <p><b>Local para retirada:</b>${client.address}</p>
+                <p><b>Nome: </b>${product.name}</p>
+                <p><b>Quantidade: </b>${product.quantity}</p>
+                <p><b>Data estimada: </b>${product.estimatedDate?date?string("dd/MM/yyyy")}</p>
+                <p><b>Local para retirada: </b>${product.address}</p>
 
                 <div class="qrcode">
                     <h3>QR-Code para Entrega</h3>
