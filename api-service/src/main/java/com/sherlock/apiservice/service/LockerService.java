@@ -16,11 +16,11 @@ public class LockerService {
         this.lockerRepository = lockerRepository;
     }
 
-    public List<Locker> getAll() {
+    public List<Locker> findAll() {
         return lockerRepository.findAll();
     }
 
-    public Locker getLockerByID(Integer id) {
+    public Locker findLockerByID(Integer id) {
         return lockerRepository.findById(id).orElse(null);
     }
 

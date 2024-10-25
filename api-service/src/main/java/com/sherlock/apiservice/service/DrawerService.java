@@ -16,15 +16,15 @@ public class DrawerService {
         this.drawerRepository = drawerRepository;
     }
 
-    public Drawer getDrawerByID(Integer id) {
+    public Drawer findDrawerByID(Integer id) {
         return drawerRepository.findById(id).orElse(null);
     }
 
-    public List<Drawer> getAll() {
+    public List<Drawer> findAll() {
         return drawerRepository.findAll();
     }
 
-    public List<Drawer> getDrawersByLockerID(Integer lockerID) {
+    public List<Drawer> findDrawersByLockerID(Integer lockerID) {
         return drawerRepository.findAllByLockerId(lockerID);
     }
 

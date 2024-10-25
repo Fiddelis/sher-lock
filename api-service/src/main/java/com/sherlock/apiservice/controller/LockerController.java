@@ -25,7 +25,7 @@ public class LockerController {
 
     @GetMapping
     public ResponseEntity<Object> getAllLockers() {
-        List<Locker> lockers = lockerService.getAll();
+        List<Locker> lockers = lockerService.findAll();
 
         if(lockers.isEmpty()) {
             errorResponse.put("error", "lockers not found");
@@ -37,7 +37,7 @@ public class LockerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getLocker(@PathVariable Integer id) {
-        locker = lockerService.getLockerByID(id);
+        locker = lockerService.findLockerByID(id);
 
         if (locker == null) {
             errorResponse.put("error", "locker not found");

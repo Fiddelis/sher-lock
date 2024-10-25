@@ -26,19 +26,19 @@
     <tr>
         <td align="center" valign="top">
             <div class="email-container">
-                <h1>Seu Código de Retirada para o Armário SherLock</h1>
+                <h1>QRCode Gerado para retirada</h1>
                 <h3>Informações do Produto</h3>
                 <p><b>Nome: </b>${product.name}</p>
                 <p><b>Quantidade: </b>${product.quantity}</p>
                 <p><b>Data estimada: </b>${product.estimatedDate?date?string("dd/MM/yyyy")}</p>
-                <p><b>Local para retirada: </b>${product.address}</p>
+                <p><b>Local para retirada: </b>${product.address!"Endereço não disponível"}</p>
 
                 <div class="qrcode">
                     <h3>QR-Code para Entrega</h3>
-                    <img src="${delivery}">
+                    <img src="data:image/png;base64,${delivery}">
 
                     <h3>QR-Code para Retirada</h3>
-                    <img src="${withdrawn}">
+                    <img src="data:image/png;base64,${withdrawn}">
                 </div>
             </div>
         </td>

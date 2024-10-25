@@ -14,9 +14,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/client")
 public class ClientController {
-    ClientService clientService;
-    Map<String, String> errorResponse = new HashMap<>();
-    Client client;
+    private final ClientService clientService;
+    private final Map<String, String> errorResponse = new HashMap<>();
+    private Client client;
 
     @Autowired
     public ClientController(ClientService clientService) {
@@ -25,7 +25,7 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<Object> getAllClients() {
-        List<Client> clients = clientService.getAll();
+        List<Client> clients = clientService.findAll();
 
         if(clients.isEmpty()) {
             errorResponse.put("error", "clients not found");
@@ -37,7 +37,7 @@ public class ClientController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getClient(@PathVariable Integer id) {
-        client = clientService.getClientByID(id);
+        client = clientService.findClientByID(id);
 
         if (client == null) {
             errorResponse.put("error", "client not found");

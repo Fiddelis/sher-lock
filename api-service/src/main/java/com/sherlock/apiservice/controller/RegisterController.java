@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sherlock.apiservice.model.*;
 import com.sherlock.apiservice.producer.MailProducer;
 import com.sherlock.apiservice.service.ClientService;
-import com.sherlock.apiservice.service.DrawerService;
 import com.sherlock.apiservice.service.LockerService;
 import com.sherlock.apiservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +16,18 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class RegisterController {
 
-    @Autowired
-    private ClientService clientService;
+    private final ClientService clientService;
+    private final ProductService productService;
+    private final LockerService lockerService;
+    private final MailProducer mailProducer;
 
     @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private LockerService lockerService;
-
-    @Autowired
-    private MailProducer mailProducer;
+    public RegisterController(ClientService clientService, ProductService productService, LockerService lockerService, MailProducer mailProducer) {
+        this.clientService = clientService;
+        this.productService = productService;
+        this.lockerService = lockerService;
+        this.mailProducer = mailProducer;
+    }
 
     @PostMapping
     public ResponseEntity<Object> createClientAndProduct(@RequestBody RegisterDTO registerDTO) {
@@ -36,7 +36,7 @@ public class RegisterController {
         registerDTO.product.setClientId(client.getId());
         Product product = productService.setProduct(registerDTO.product);
 
-        Locker locker = lockerService.getLockerByID(product.getLockerId());
+        Locker locker = lockerService.findLockerByID(product.getLockerId());
         product.setAddress(locker.getAddress());
 
         registerDTO.client = client;

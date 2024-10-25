@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class ClientService {
-
     ClientRepository clientRepository;
 
     @Autowired
@@ -17,11 +16,11 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public List<Client> getAll() {
+    public List<Client> findAll() {
         return clientRepository.findAll();
     }
 
-    public Client getClientByID(Integer id) {
+    public Client findClientByID(Integer id) {
         return clientRepository.findById(id).orElse(null);
     }
 

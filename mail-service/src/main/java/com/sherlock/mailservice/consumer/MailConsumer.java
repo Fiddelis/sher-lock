@@ -17,14 +17,14 @@ import java.io.IOException;
 
 @Component
 public class MailConsumer {
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final MailService mailService;
 
-    Client client;
-    Product product;
 
     @Autowired
-    MailService mailService;
-
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    public MailConsumer(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     @RabbitListener(queues = "mail-request-queue")
     public void receiveMessage(String message) {

@@ -17,15 +17,15 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product getProductByID(Integer id) {
+    public Product findProductByID(Integer id) {
         return productRepository.findById(id).orElse(null);
     }
 
-    public List<Product> getAll() {
+    public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    public List<Product> getAllByLockerIdAndWithdrawnDateIsNull(Integer lockerID) {
+    public List<Product> findAllByLockerIdAndWithdrawnDateIsNull(Integer lockerID) {
         return productRepository.findAllByLockerIdAndWithdrawnDateIsNull(lockerID);
     }
 

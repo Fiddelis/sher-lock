@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MailController {
-    @Autowired
     MailService mailService;
+
+    @Autowired
+    public MailController(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     @RequestMapping(method = RequestMethod.POST,path = "/register")
     @ResponseBody
-    public String register(@RequestBody RegisterDTO registerDTO) throws Exception {
-        System.out.println(registerDTO);
-
-        mailService.sendEmailWithQRCode(    registerDTO);
-        return "Email Sent..!";
+    public void register(@RequestBody RegisterDTO registerDTO) throws Exception {
+        mailService.sendEmailWithQRCode(registerDTO);
     }
 }

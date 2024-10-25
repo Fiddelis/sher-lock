@@ -6,6 +6,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.sherlock.mailservice.controller.MailController;
 import com.sherlock.mailservice.model.Client;
 import com.sherlock.mailservice.model.Product;
 import com.sherlock.mailservice.model.RegisterDTO;
@@ -23,9 +24,12 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Service
 public class MailService {
+    private static final Logger logger = Logger.getLogger(MailService.class.getName());
+
     final Configuration configuration;
     final JavaMailSender javaMailSender;
 
@@ -38,9 +42,6 @@ public class MailService {
         Client client = registerDTO.getClient();
         Product product = registerDTO.getProduct();
 
-        System.out.println(client);
-        System.out.println(product);
-
         // Gera o QR code e obtém os bytes da imagem
         byte[] qrCodeDelivery = generateQRCodeImage(product.getDeliveryCode(), 200, 200);
         byte[] qrCodeWithdrawn = generateQRCodeImage(product.getWithdrawnCode(), 200, 200);
@@ -52,9 +53,10 @@ public class MailService {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
 
-        helper.setSubject("Sherlock - Entrega com QR Code");
+        helper.setSubject("Seu Código de Retirada para o Armário SherLock");
         helper.setTo(client.getMail());
         helper.setFrom("contato@sherlog.shop");
+
         // Obtém o conteúdo HTML do template
         String emailContent = getEmailContent(client, product);
 
@@ -66,7 +68,8 @@ public class MailService {
 
         // Envia o e-mail
         javaMailSender.send(mimeMessage);
-        System.out.println("Email enviado para: " + client.getMail());
+
+        logger.info("Email enviado para: " + client.getMail());
     }
 
     private byte[] generateQRCodeImage(String text, int width, int height) throws IOException, WriterException {

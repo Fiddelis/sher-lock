@@ -25,7 +25,7 @@ public class DrawerController {
 
     @GetMapping
     public ResponseEntity<Object> getAllDrawers() {
-        List<Drawer> drawers = drawerService.getAll();
+        List<Drawer> drawers = drawerService.findAll();
 
         if(drawers.isEmpty()) {
             errorResponse.put("error", "drawers not found");
@@ -37,7 +37,7 @@ public class DrawerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getDrawer(@PathVariable Integer id) {
-        drawer = drawerService.getDrawerByID(id);
+        drawer = drawerService.findDrawerByID(id);
 
         if (drawer == null) {
             errorResponse.put("error", "drawer not found");
@@ -49,7 +49,7 @@ public class DrawerController {
 
     @GetMapping("/by_locker/{id}")
     public ResponseEntity<Object> getDrawersByLockerID(@PathVariable Integer id) {
-        List<Drawer> drawers = drawerService.getDrawersByLockerID(id);
+        List<Drawer> drawers = drawerService.findDrawersByLockerID(id);
 
         if (drawers.isEmpty()) {
             errorResponse.put("error", "drawers not found");

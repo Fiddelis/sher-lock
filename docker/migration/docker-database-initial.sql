@@ -45,5 +45,5 @@ INSERT INTO locker (address, latitude, longitude) VALUES
 ('Instituto Nacional de Telecomunicações - Inatel', -22.257218, -45.696542);
 
 INSERT INTO drawer (locker_id, dimension) VALUES
-(1, '09x30x30 cm'),
+(0, '09x30x30 cm'),
 (1, '16x40x30 cm');
